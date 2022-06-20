@@ -1,20 +1,30 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, SafeAreaView, Platform, StatusBar } from "react-native";
+import { WebView } from "react-native-webview";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaView style={styles.AndroidSafeArea}>
+      <WebView
+        source={{
+          html: '<blockquote class="twitter-tweet"><a href="https://twitter.com/MDEdgeTweets/status/1538939493549363200"></a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>',
+        }}
+      />
+      {/* 
+      <WebView
+        // style={styles.container}
+        source={{
+          html: '<a class="twitter-timeline" href="https://twitter.com/In4Gaming/lists/1538943812600487936"></a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>',
+        }}
+      /> */}
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  AndroidSafeArea: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    padding:10,
+    // backgroundColor: theme.white.colors.accent_5,
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
 });
